@@ -1,0 +1,9 @@
+{
+  "name": "elliotts-kebab-site",
+  "private": true,
+  "version": "1.0.0",
+  "type": "commonjs",
+  "dependencies": {
+    "stripe": "^14.25.0"
+  }
+}

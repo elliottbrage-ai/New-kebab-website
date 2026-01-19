@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Betaling avbrutt – Elliott's Kebab</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header" id="top">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="Elliott's Kebab">
+        <span class="brand-mark">EK</span>
+        <span class="brand-name">Elliott's Kebab</span>
+      </a>
+      <nav class="nav">
+        <a href="index.html#menu">Meny</a>
+        <a href="index.html#order">Bestill</a>
+        <a href="index.html#map">Kart</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>Betaling avbrutt</h2>
+          <p class="muted">Ingen stress – du kan prøve igjen når som helst.</p>
+        </div>
+
+        <div class="panel">
+          <div class="muted">Du ble sendt tilbake fra Stripe Checkout uten å fullføre betalingen.</div>
+          <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
+            <a class="btn btn-primary" href="index.html#order">Prøv igjen</a>
+            <a class="btn btn-ghost" href="index.html">Hjem</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>© <span id="year"></span> Elliott's Kebab</div>
+      <div class="footer-links">
+        <a href="index.html#menu">Meny</a>
+        <a href="index.html#order">Bestill</a>
+        <a href="index.html#map">Kart</a>
+        <a href="index.html#about">Om oss</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>document.getElementById('year').textContent = String(new Date().getFullYear());</script>
+</body>
+</html>
