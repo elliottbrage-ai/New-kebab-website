@@ -28,12 +28,21 @@ function getDeliveryFee(subtotal) {
 exports.handler = async (event) => {
   try {
     if (event.httpMethod !== "POST") {
-      return { statusCode: 405, body: "Method Not Allowed" };
+      return {
+        statusCode: 405,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ error: "Method Not Allowed" }),
+      };
     }
 
     const stripeKey = process.env.STRIPE_SECRET_KEY;
     if (!stripeKey) {
-      return { statusCode: 500, body: "Missing STRIPE_SECRET_KEY" };
+      console.error("Missing STRIPE_SECRET_KEY environment variable");
+      return {
+        statusCode: 500,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ error: "Missing STRIPE_SECRET_KEY" }),
+      };
     }
 
     const stripe = new Stripe(stripeKey, { apiVersion: "2023-10-16" });
@@ -100,10 +109,16 @@ exports.handler = async (event) => {
       body: JSON.stringify({ url: session.url }),
     };
   } catch (err) {
+    const message = err && err.message ? err.message : String(err);
+    console.error("create-checkout-session error:", message);
+    if (err && err.type) console.error("stripe_error_type:", err.type);
+    if (err && err.code) console.error("stripe_error_code:", err.code);
+    if (err && err.raw && err.raw.message) console.error("stripe_raw_message:", err.raw.message);
+
     return {
       statusCode: 500,
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ error: "Server error" }),
+      body: JSON.stringify({ error: "Server error", detail: message }),
     };
   }
 };
